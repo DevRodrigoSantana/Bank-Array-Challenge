@@ -76,5 +76,3 @@ public class UsarCliente {
 	public static void main(String[] args) {
 	menu();
 }}
-    
-}
