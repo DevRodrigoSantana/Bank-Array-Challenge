@@ -26,7 +26,4 @@ public class Cliente {
         public void setSaldo(float saldo) {
             this.saldo = saldo;
         }
-        
-        
-        
     }
