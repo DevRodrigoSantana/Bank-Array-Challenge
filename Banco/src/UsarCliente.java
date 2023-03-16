@@ -16,7 +16,7 @@ public class UsarCliente {
 		System.out.println("2 : Saldo");
 		System.out.println("3 : Mostrar extrato");
 		System.out.println("4 : Deposito");
-		System.out.println("5 : Sacar");
+		System.out.println("5 : Saque");
 		System.out.println("6 : Transferencia");
 		System.out.println("7 : sair");
 		
@@ -53,7 +53,7 @@ public class UsarCliente {
 				transferencia();
 				break;
 			case 7:
-				extrato();
+				sair();
 			}
 			}
 		
@@ -61,7 +61,7 @@ public class UsarCliente {
 			menu();
 			
 			}catch (NumberFormatException e) {
-				System.out.println("Você não digitou a opção corretamente.\nDigite um número de 1 a 6 Por favor.");
+				System.out.println("\nVocê não digitou a opção corretamente.\nDigite um número de 1 a 6 Por favor.\n");
 			menu();
 		}
 			
@@ -72,43 +72,23 @@ public class UsarCliente {
 	private static void cadastrar() {
 		ListaDeContas[contas] = new Cliente();
         //pega nome digitado
-        System.out.println(" OK Vamos Começar? \n   Primeiro digite seu nome\n " + "[" + (contas ) + "]\n"+"Digite seu NOME :");
+        System.out.println("\n OK Vamos Começar?\n"+" \n Primeiro digite seu nome " + "[" + (contas ) + "]\n"+" \nDigite seu NOME :");
 		ListaDeContas[contas].setNomeCliente(entrada.nextLine());
 		entrada.nextLine();
 		// pega senha numerica
 		try {
-			System.out.println("OK !!\n Agora Digite  o Numero de sua Conta" + "[" + (contas ) + "]\n"+"\nDigite Numero da conta :");
+			System.out.println("\nOK !!\n Agora Digite  o Numero de sua Conta" + "[" + (contas ) + "]\n"+"\nDigite Numero da conta :");
 			ListaDeContas[contas].setNumeroConta(entrada.nextInt());
 		} catch (NumberFormatException e) {
-			System.out.println("Você não digitou os numeros corretamente. Tente Novamente\n");
+			System.out.println("\nVocê não digitou os numeros corretamente. Tente Novamente\n");
 			
 			System.out.println("OK !!\n Agora Digite sua Senha Numerica" + "[" + (contas ) + "]\n"+"\nDigite Numero da conta: ");
 			ListaDeContas[contas].setNumeroConta(entrada.nextInt());
 		}
-		//tratativa para saldo
 			System.out.println("\nSeu saldo Inicial:\n R$ 0,00");
-			try {
-				System.out.println(" \nGostaria de efetuar seu primeiro deposito ??\n 1-SIM\n 2-NÃO");
-				int escolhaa =entrada.nextInt();
-
-				if(escolhaa<0||escolhaa>2){
-					System.out.println("Digite opção válida!!  Vamos Recomeçar");
-					cadastrar();
-				}else{
-					switch(escolhaa){
-						case 1:
-							deposito();
-						break;	
-						case 2 :
-						float saldoinicial=0;
-						ListaDeContas[contas].setSaldo(saldoinicial);
-					}
-				}
-			} catch (NumberFormatException e) {
-				System.out.println("Digite opção válida!!  Vamos Recomeçar");
-				menu();
-			}
-			System.out.println(" Cadastro realizado com sucesso !!!");
+			
+			
+			System.out.println("\nCadastro realizado com sucesso !!!");
 			contas++;
 			menu();
 			
@@ -117,7 +97,7 @@ public class UsarCliente {
 	private static void listarClientes() {
 		
 	for(int i=0;i<ListaDeContas.length;i++){
-		System.out.println("Nome do Titular :"+ListaDeContas[i].getNomeCliente()+
+		System.out.println("\nNome do Titular :"+ListaDeContas[i].getNomeCliente()+
 						   "\nSaldo : R$ "+ListaDeContas[i].getSaldo());
 
 	}
@@ -127,15 +107,15 @@ public class UsarCliente {
 // apartir da comparaçao do numero da conta 
 	private static void extrato() {
 		try {
-			System.out.println("Digite numero da Conta :");
+			System.out.println("\nDigite numero da Conta :");
 			int numerodeconta = entrada.nextInt();
 			for(int i =0;i<ListaDeContas.length;i++){
 				if(ListaDeContas[i].getNumeroConta() == numerodeconta){
-					System.out.println("Saldo disponivel: R$ "+ListaDeContas[i].getSaldo());
+					System.out.println("\nSaldo disponivel: R$ "+ListaDeContas[i].getSaldo());
 				}
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Numero digitado Incorretamente");
+			System.out.println("\nNumero digitado Incorretamente");
 			extrato();
 		}
 		menu();
@@ -143,10 +123,10 @@ public class UsarCliente {
 	
 	private static void deposito() {
 		try {
-			System.out.println("digite numero da conta para deposito :\n");
+			System.out.println("\ndigite numero da conta para deposito :\n");
 			int numerocontadeposito = entrada.nextInt();
 			System.out.println("\nQual Valor para deposito :");
-			int valordeposito = entrada.nextInt();
+			float valordeposito = entrada.nextInt();
 			for(int i = 0;i<ListaDeContas.length;i++){
 			 if(ListaDeContas[i].getNumeroConta() == numerocontadeposito){
 				Float saldonovo = ListaDeContas[i].getSaldo()+ valordeposito;
@@ -155,12 +135,79 @@ public class UsarCliente {
 			 }
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Digitado incorretamente"+"\nTente novamente");
+			System.out.println("\nDigitado incorretamente"+"\nTente novamente");
 				deposito();
 		}
 		menu();
 	}
-	private static void saque() {}
-	private static void transferencia() {}
+	private static void saque() {
+		try {
+			System.out.println("\n Dê qual conta deseja realizar o saque: /n");
+			int numerosaque = entrada.nextInt();
+			System.out.println("\nQual Valor do saque ? \n");
+			float valorsaque = entrada .nextInt();
+			for (int i = 0;i<ListaDeContas.length;i++){
+				if(ListaDeContas[i].getNumeroConta() == numerosaque){
+					if(ListaDeContas[i].getSaldo()<=valorsaque){
+					float novosaldo = ListaDeContas[i].getSaldo() - valorsaque;
+					ListaDeContas[i].setSaldo(novosaldo);
+					System.out.println("\nsaque realizado com sucesso ? /n");				}
+				}else{
+					System.out.println("\nValor do saque maior do que o saldo.\nSaque não concluído.");
+					
+				}
+
+			}
+			
+		} catch (NumberFormatException e) {
+			System.out.println("\nDigitado incorretamente"+"\nTente novamente");
+			saque();
+		}
+		menu();
+
+	}
+	private static void transferencia() {
+	try{
+		System.out.println("\nQual numero da sua conta ? ");
+		int numerodaconta = entrada.nextInt();
+		System.out.println("\nQual valor de Transferência ?");
+		float valortransferencia = entrada.nextInt();
+		System.out.println(" \nQual conta irá receber ?");
+		int  receber = entrada.nextInt();
+		
+		for (int i =0; i<ListaDeContas.length;i++){
+			try {
+				if(ListaDeContas[i].getNumeroConta() == numerodaconta){
+					if(valortransferencia<=ListaDeContas[i].getSaldo()){
+					float novosaldoorigen =ListaDeContas[i].getSaldo()-valortransferencia;
+						ListaDeContas[i].setSaldo(novosaldoorigen);
+						System.out.println("\nTransferência realizada com sucesso");
+					}else{
+						System.out.println("\nValor da tranferência maior do que o saldo.\nTranferência não concluída.");
+					}
+			}
+			}catch(NullPointerException e){
+			continue;
+			}
+		}
+		for(int i = 0;i<ListaDeContas.length;i++){
+			try{
+			if(ListaDeContas[i].getNumeroConta() == receber){
+				float valorrecebido = ListaDeContas[i].getSaldo()+ receber;
+				ListaDeContas[i].setSaldo(valorrecebido);
+			}
+			}catch(NullPointerException e){
+				continue;
+			}
+		}
+	}catch(NumberFormatException e){
+		System.out.println("\nVocê digitou algo errado. Tente novamente.");
+	}
+	menu();
+}
+	private static  void sair () {
+		System.out.println("\nAgradecemos à visita !! Voçte sempre");
+	System.exit(0);
 	
+}
 }
