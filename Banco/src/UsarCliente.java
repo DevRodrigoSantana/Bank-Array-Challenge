@@ -121,6 +121,7 @@ public class UsarCliente {
 						   "\nSaldo : R$ "+ListaDeContas[i].getSaldo());
 
 	}
+	menu();
 }
 //FUnção para mostrar o extrato da conta 
 // apartir da comparaçao do numero da conta 
@@ -137,9 +138,27 @@ public class UsarCliente {
 			System.out.println("Numero digitado Incorretamente");
 			extrato();
 		}
+		menu();
 	}
 	
 	private static void deposito() {
+		try {
+			System.out.println("digite numero da conta para deposito :\n");
+			int numerocontadeposito = entrada.nextInt();
+			System.out.println("\nQual Valor para deposito :");
+			int valordeposito = entrada.nextInt();
+			for(int i = 0;i<ListaDeContas.length;i++){
+			 if(ListaDeContas[i].getNumeroConta() == numerocontadeposito){
+				Float saldonovo = ListaDeContas[i].getSaldo()+ valordeposito;
+				ListaDeContas[i].setSaldo(saldonovo);
+				System.out.println("\nDeposito realizado com sucesso");
+			 }
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Digitado incorretamente"+"\nTente novamente");
+				deposito();
+		}
+		menu();
 	}
 	private static void saque() {}
 	private static void transferencia() {}
