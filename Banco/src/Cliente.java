@@ -3,16 +3,16 @@ public class Cliente {
     
         // variaveis para guardar nome, numero da conta e saldo do cliente 
         
-        private  int numeroSenha;
+        private  int numeroConta;
         private String nomeCliente;
         private float saldo;
         
         //get's das vaiaveis. Cada  pega o valor setado e armazena
-        public int getNumeroSenha() {
-            return numeroSenha;
+        public int getNumeroConta() {
+            return numeroConta;
         }
-        public void setNumeroSenha(int numeroSenha) {
-            this.numeroSenha = numeroSenha;
+        public void setNumeroConta(int numeroConta) {
+            this.numeroConta = numeroConta;
         }
         public String getNomeCliente() {
             return nomeCliente;

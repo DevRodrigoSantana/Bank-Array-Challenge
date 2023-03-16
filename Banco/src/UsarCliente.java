@@ -77,13 +77,13 @@ public class UsarCliente {
 		entrada.nextLine();
 		// pega senha numerica
 		try {
-			System.out.println("OK !!\n Agora Digite sua Senha Numerica" + "[" + (contas ) + "]\n"+"Digite sua Senha :");
-			ListaDeContas[contas].setNumeroSenha(entrada.nextInt());
+			System.out.println("OK !!\n Agora Digite  o Numero de sua Conta" + "[" + (contas ) + "]\n"+"\nDigite Numero da conta :");
+			ListaDeContas[contas].setNumeroConta(entrada.nextInt());
 		} catch (NumberFormatException e) {
 			System.out.println("Você não digitou os numeros corretamente. Tente Novamente\n");
 			
-			System.out.println("OK !!\n Agora Digite sua Senha Numerica" + "[" + (contas ) + "]\n"+" Digite sua Senha : ");
-			ListaDeContas[contas].setNumeroSenha(entrada.nextInt());
+			System.out.println("OK !!\n Agora Digite sua Senha Numerica" + "[" + (contas ) + "]\n"+"\nDigite Numero da conta: ");
+			ListaDeContas[contas].setNumeroConta(entrada.nextInt());
 		}
 		//tratativa para saldo
 			System.out.println("\nSeu saldo Inicial:\n R$ 0,00");
@@ -113,13 +113,33 @@ public class UsarCliente {
 			menu();
 			
 		}
+		///lista das contas percorre o array
+	private static void listarClientes() {
 		
-	private static void listarClientes() {}
-	private static void extrato() {
-		
-	}
-	private static void deposito() {
+	for(int i=0;i<ListaDeContas.length;i++){
+		System.out.println("Nome do Titular :"+ListaDeContas[i].getNomeCliente()+
+						   "\nSaldo : R$ "+ListaDeContas[i].getSaldo());
 
+	}
+}
+//FUnção para mostrar o extrato da conta 
+// apartir da comparaçao do numero da conta 
+	private static void extrato() {
+		try {
+			System.out.println("Digite numero da Conta :");
+			int numerodeconta = entrada.nextInt();
+			for(int i =0;i<ListaDeContas.length;i++){
+				if(ListaDeContas[i].getNumeroConta() == numerodeconta){
+					System.out.println("Saldo disponivel: R$ "+ListaDeContas[i].getSaldo());
+				}
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Numero digitado Incorretamente");
+			extrato();
+		}
+	}
+	
+	private static void deposito() {
 	}
 	private static void saque() {}
 	private static void transferencia() {}
